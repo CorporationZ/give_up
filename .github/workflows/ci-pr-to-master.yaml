@@ -1,0 +1,34 @@
+name: Check Master PRs
+
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize, edited]
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  checkPR:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.base.ref == 'master'
+    steps:
+      - name: Fail if targeted at master
+        run: |
+          echo "PRs to the master branch are not allowed. Please change the target branch of your PR."
+          exit 1
+
+      - name: Notify User
+        if: always()
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const issue_number = context.issue.number;
+            const message = "⚠️ **XATO**: Siz PR ni master tarmog'iga yaratdingiz. PR larni faqat o'zingizning {foydalanuvchi_nomi_discord} ko'rinishidagi tarmog'ingizga yaratishingiz mumkin. Iltimos, yuqoridagi Edit tugmasini bosing va PR yuborayotgan tarmog'ingizni o'zgartiring. Shundan so'ng pastdagi qizil xato yo'qolishi kerak, lekin ushbu izoh qoladi - bu normal holat.";
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue_number,
+              body: message
+            });
