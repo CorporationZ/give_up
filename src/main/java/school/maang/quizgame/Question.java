@@ -8,7 +8,7 @@ public class Question {
     private String optionC; // variant-c
     private String correctAnswer; // to'g'ri javob
 
-    // konstruktor
+    // konstruktor.
     public Question(String question, String optionA, String optionB, String optionC, String correctAnswer) {
         this.question = question;
         this.optionA = optionA;
