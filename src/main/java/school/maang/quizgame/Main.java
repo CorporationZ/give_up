@@ -23,7 +23,6 @@ public class Main {
                 System.out.println("Noto'g'ri tanlov. Qayta urinib ko'ring.");
             }
         }
-
         scanner.close();
     }
 }
