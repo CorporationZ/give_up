@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in); // userdan kiritishni olish uchun.
-        Controller controller = new Controller(); // Controller obyekti yaratamiz
+        Controller controller = new Controller(); // Controller obyekti yaratamiz.
 
         while (true) { // cheksiz sikl
             System.out.println("\n1. Start\n2. Coin\n3. Exit");

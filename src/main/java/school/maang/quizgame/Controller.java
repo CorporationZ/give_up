@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Controller {
     private ArrayList<Question> questions; // savollar ro'yxati.
-    private int totalScore; // umumiy to'plagan ballar
+    private int totalScore; // umumiy to'plagan ballar.
 
     // konstruktor
     public Controller() {
