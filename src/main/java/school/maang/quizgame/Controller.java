@@ -16,11 +16,19 @@ public class Controller {
 
     // .addQuestion metodi orqali yana savollar qo'shishingiz mumkin
     private void initializeQuestions() {
-        questions.add(new Question("1-savol: final kalit so‘zi qanday ma’noni anglatadi?", "a. O‘zgaruvchi qiymati o‘zgarishi mumkin", "b. O‘zgaruvchi qiymati o‘zgarmas bo‘ladi", "c. Bu metod faqat o‘qilishi mumkin", "b"));
-        questions.add(new Question("2-savol: JVM nimani anglatadi?", "a. Java Virtual Machine", "b. Java Visual Model", "c. Java Version Manager", "a"));
-        questions.add(new Question("3-savol: Java-da ArrayList qanday ishlatiladi?", "a. Statik o‘lchamga ega massiv yaratadi", "b. Dinamik o‘lchamga ega ro‘yxat yaratadi", "c. Obyektlarni jadval shaklida saqlaydi", "b"));
-        questions.add(new Question("4-savol: Java ning asosiy xususiyati nima?", "a. Platformaga bog'liq", "b. Platformaga bog'liq emas", "c. Tez ishlash", "b"));
-        questions.add(new Question("5-savol: Java dasturlarining kengaytmasi nima?", "a. .java", "b. .class", "c. .jav", "a"));
+        questions.add(new Question("1-savol: final kalit so‘zi qanday ma’noni anglatadi?",
+                "a. O‘zgaruvchi qiymati o‘zgarishi mumkin", "b. O‘zgaruvchi qiymati o‘zgarmas" +
+                " bo‘ladi", "c. Bu metod faqat o‘qilishi mumkin", "b"));
+        questions.add(new Question("2-savol: JVM nimani anglatadi?", "a. Java Virtual Machine",
+                "b. Java Visual Model", "c. Java Version Manager", "a"));
+        questions.add(new Question("3-savol: Java-da ArrayList qanday ishlatiladi?", "a. Statik" +
+                " o‘lchamga ega massiv yaratadi", "b. Dinamik o‘lchamga ega ro‘yxat yaratadi",
+                "c. Obyektlarni jadval shaklida saqlaydi", "b"));
+        questions.add(new Question("4-savol: Java ning asosiy xususiyati nima?",
+                "a. Platformaga bog'liq", "b. Platformaga bog'liq emas", "c. Tez ishlash",
+                "b"));
+        questions.add(new Question("5-savol: Java dasturlarining kengaytmasi nima?", "a. .java",
+                "b. .class", "c. .jav", "a"));
     }
 
     public void startQuiz(Scanner scanner) {
@@ -51,7 +59,8 @@ public class Controller {
         return totalScore;
     }
 
-    public void addQuestion(String question, String optionA, String optionB, String optionC, String correctAnswer) {
+    public void addQuestion(String question, String optionA, String optionB, String optionC,
+                            String correctAnswer) {
         questions.add(new Question(question, optionA, optionB, optionC, correctAnswer));
     }
 }
