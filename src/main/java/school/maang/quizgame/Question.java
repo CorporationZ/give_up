@@ -6,7 +6,7 @@ public class Question {
     private String optionA; // variant-a
     private String optionB; // variant-b
     private String optionC; // variant-c
-    private String correctAnswer; // to'g'ri javob.
+    private String correctAnswer; // to'g'ri javob..
 
     // konstruktor.
     public Question(String question, String optionA, String optionB, String optionC, String correctAnswer) {
