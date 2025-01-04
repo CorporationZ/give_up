@@ -18,18 +18,14 @@ public class Main {
 
             int chose = input.nextInt();
 
-            switch (chose) {
-                case 1 -> {
-                    System.out.println("O'yin boshlandi !!!!");
-                    System.out.println("------------------------------");
-                    startGame(input, controller);
-                }
-                case 2 -> {
-                    System.out.println("Your coin: " + controller.getCoin());
-                }
-                case 3 -> {
-                    System.exit(0);
-                }
+            if (chose == 1) {
+                System.out.println("O'yin boshlandi !!!!");
+                System.out.println("------------------------------");
+                startGame(input, controller);
+            } else if (chose == 2) {
+                System.out.println("Your coin: " + controller.getCoin());
+            } else {
+                System.exit(0);
             }
         }
     }

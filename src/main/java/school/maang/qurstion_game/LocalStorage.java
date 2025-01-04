@@ -10,10 +10,26 @@ public class LocalStorage {
     public static ArrayList<QuestionModel> loadQuestion() {
         questions.clear();
 
-        QuestionModel question1 = new QuestionModel(1, "What is the capital of France?", "Paris", List.of("Paris", "London", "Berlin", "Madrid"));
-        QuestionModel question2 = new QuestionModel(2, "What is the capital of Germany?", "Berlin", List.of("Paris", "London", "Berlin", "Madrid"));
-        QuestionModel question3 = new QuestionModel(3, "What is the capital of Spain?", "Madrid", List.of("Paris", "London", "Berlin", "Madrid"));
-        QuestionModel question4 = new QuestionModel(4, "What is the capital of England?", "London", List.of("Paris", "London", "Berlin", "Madrid"));
+        QuestionModel question1 = new QuestionModel(
+                1,
+                "What is the capital of France?",
+                "Paris",
+                List.of("Paris", "London", "Berlin", "Madrid")
+        );
+        QuestionModel question2 = new QuestionModel(
+                2,
+                "What is the capital of Germany?",
+                "Berlin",
+                List.of("Paris", "London", "Berlin", "Madrid")
+        );
+        QuestionModel question3 = new QuestionModel(3,
+                "What is the capital of Spain?",
+                "Madrid",
+                List.of("Paris", "London", "Berlin", "Madrid"));
+        QuestionModel question4 = new QuestionModel(4,
+                "What is the capital of England?",
+                "London",
+                List.of("Paris", "London", "Berlin", "Madrid"));
 
         questions.add(question1);
         questions.add(question2);
