@@ -4,10 +4,11 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in); // userdan kiritishni olish uchun..
-        Controller controller = new Controller(); // Controller obyekti yaratamiz.
+        Scanner scanner = new Scanner(System.in);
+        QuestionStore questionBank = new QuestionStore();
+        Controller controller = new Controller(questionBank);
 
-        while (true) { // cheksiz sikl
+        while (true) {
             System.out.println("\n1. Start\n2. Coin\n3. Exit");
             System.out.print("Tanlovingizni kiriting: ");
             String choice = scanner.nextLine();
@@ -23,6 +24,7 @@ public class Main {
                 System.out.println("Noto'g'ri tanlov. Qayta urinib ko'ring.");
             }
         }
+
         scanner.close();
     }
 }
