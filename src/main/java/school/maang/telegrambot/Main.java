@@ -15,7 +15,6 @@ public class Main {
             botApi.registerBot(bot);
             log.info("Bo't ishga tushdi.");
         } catch (Exception e) {
-            e.printStackTrace();
             log.error("Hatolik yuzaga keldi.");
         }
     }

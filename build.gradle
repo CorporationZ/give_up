@@ -71,3 +71,7 @@ tasks.checkstyleTest {
 
     classpath = files()
 }
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
