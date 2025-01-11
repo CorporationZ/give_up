@@ -16,7 +16,7 @@ public class Main {
             TelegramBotsApi botApi = new TelegramBotsApi(DefaultBotSession.class);
             MyBot bot = new MyBot();
             botApi.registerBot(bot); // Ёки botApi.registerBot(new MyBot());
-            log.info("Bot ishga tushdi.");
+            log.info("Bot ishga tushdi..");
         } catch (Exception e) {
             e.printStackTrace();
         }
