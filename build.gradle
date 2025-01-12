@@ -24,7 +24,7 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.24.2")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.9.2")
 
-    implementation group: 'org.telegram', name: 'telegrambots', version: '6.9.7.1'
+    implementation group: 'org.telegram', name: 'telegrambots', version: '6.1.0'
 }
 
 test {
