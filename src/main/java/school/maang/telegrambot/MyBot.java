@@ -50,17 +50,26 @@ public class MyBot extends TelegramLongPollingBot {
 
                 }
                 else if (text.equalsIgnoreCase("\uD83C\uDF81 Aksiya" )){
+                    chatId = habar.getChatId().toString();
+                    sendTelegram(buttons.aksiya(chatId));
 
                 }
                 else if (text.equalsIgnoreCase("\uD83E\uDED4 Lavash")){
+                    chatId = habar.getChatId().toString();
+                    sendTelegram(buttons.lavash1(chatId));
 
                 }
                 else if (text.equalsIgnoreCase(" \uD83C\uDF54Burger")){
+                    chatId = habar.getChatId().toString();
+                    sendTelegram(buttons.burger(chatId));
 
                 }
                 else if (text.equalsIgnoreCase(" \uD83C\uDF2D HotDog" )){
+                    chatId = habar.getChatId().toString();
+
 
                 }
+
 
 
             } else if (habar.hasContact()) {
@@ -98,8 +107,7 @@ public class MyBot extends TelegramLongPollingBot {
             execute(sendMessage);
         } catch (TelegramApiException e) {
             log.info("Error : {}", e.getMessage());
-        }
-        ;
+        };
 
     }
 }
