@@ -3,9 +3,14 @@ package school.maang.telegrambot;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.methods.send.SendAudio;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.*;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
+import java.io.File;
+import java.util.Optional;
 
 @Slf4j
 public class MyBot extends TelegramLongPollingBot {
@@ -31,26 +36,50 @@ public class MyBot extends TelegramLongPollingBot {
 
         if (update.hasMessage()) {
             Message message = update.getMessage();
+            chatId = message.getChatId().toString();
 
             if (message.hasText()) {
                 String text = message.getText();
 
                 if (text.equalsIgnoreCase("/start")) {
-                    chatId = message.getChatId().toString();
                     sendTelegram(buttons.chooseLanguage(chatId));
-                } else if (text.equalsIgnoreCase("\uD83C\uDF81 Promokodni ro'yxatdan o'tkazish")) {
+                } else if (text.equalsIgnoreCase("\uD83E\uDD59 Ovqatlar")) {
+                    sendTelegram(buttons.ovqatlar(chatId));
+                } else if (text.equalsIgnoreCase("Back")) {
+                    sendTelegram(buttons.menu(chatId));
+                } else if (text.equalsIgnoreCase("Lavash")) {
+                    openBox(buttons.sendProduct(text, chatId).get());
+                } else if (text.equalsIgnoreCase("Burger")) {
+                    openBox(buttons.sendProduct(text, chatId).get());
+                } else if (text.equalsIgnoreCase("Hotdog")) {
+                    openBox(buttons.sendProduct(text, chatId).get());
+                } else if (text.equalsIgnoreCase("Danar")) {
+                    openBox(buttons.sendProduct(text, chatId).get());
+                }else if(text.equalsIgnoreCase("ashula")){
 
+                    InputFile file = new InputFile(new File("C:\\Users\\Asus\\Desktop\\Ovqat\\ashula.mp3"));
+
+                    SendAudio audio = new SendAudio();
+                    audio.setAudio(file);
+                    audio.setCaption("Bu juda zor qo'shiq");
+                    audio.setChatId(chatId);
+
+                    try {
+                        execute(audio);
+                    } catch (TelegramApiException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                else {
+
+                    openBox(buttons.sendProduct(text, chatId).get());
                 }
 
-            } else if (message.hasContact()) {
-                /*Contact contact = message.getContact();
-
-                SendMessage sendMessage = new SendMessage();
-                sendMessage.setText(contact.getFirstName() + "\n" + contact.getPhoneNumber());
-                sendMessage.setChatId("1732668204");
-                sendTelegram(sendMessage);*/
+            }
+            else if (message.hasContact()) {
                 sendTelegram(buttons.registerLocation(chatId));
-            } else if (message.hasLocation()) {
+            }
+            else if (message.hasLocation()) {
                 Location location = message.getLocation();
                 sendTelegram(buttons.menu(chatId));
             }
@@ -67,9 +96,25 @@ public class MyBot extends TelegramLongPollingBot {
         }
     }
 
+    private void openBox(Object o) {
+        if (o instanceof SendMessage) {
+            sendTelegram((SendMessage) o);
+        } else {
+            sendTelegram((SendPhoto) o);
+        }
+    }
+
     private void sendTelegram(SendMessage sendMessage) {
         try {
             execute(sendMessage);
+        } catch (TelegramApiException e) {
+            log.error("Error : {}", e.getMessage());
+        }
+    }
+
+    private void sendTelegram(SendPhoto sendPhoto) {
+        try {
+            execute(sendPhoto);
         } catch (TelegramApiException e) {
             log.error("Error : {}", e.getMessage());
         }

@@ -2,16 +2,22 @@ package school.maang.telegrambot;
 
 import org.telegram.telegrambots.meta.api.methods.ParseMode;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
+import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 public class Buttons {
+
 
     public SendMessage chooseLanguage(String chatId) {
 
@@ -90,7 +96,7 @@ public class Buttons {
 
     public SendMessage menu(String chatId) {
         KeyboardButton promo = new KeyboardButton();
-        promo.setText("\uD83C\uDF81 Promokodni ro'yxatdan o'tkazish");
+        promo.setText("\uD83E\uDD59 Ovqatlar");
 
         KeyboardButton myPromo = new KeyboardButton();
         myPromo.setText("\uD83D\uDECD Mening promokodlarim");
@@ -118,4 +124,66 @@ public class Buttons {
         message.setReplyMarkup(markup);
         return message;
     }
+
+    public SendMessage ovqatlar(String chatId) {
+
+        ArrayList<Products> products = LocalData.loadProducts();
+
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setText("Ovqatni tanlang :");
+        sendMessage.setChatId(chatId);
+
+        List<KeyboardRow> rowList = new ArrayList<>();
+
+        int a = 0;
+
+        for (int i = 0; i < products.size() / 2; i++) {
+            KeyboardRow row = new KeyboardRow();
+            for (int j = 0; j < 2; j++) {
+                KeyboardButton button = new KeyboardButton();
+                button.setText(products.get(a).getName());
+                a++;
+                row.add(button);
+            }
+            rowList.add(row);
+        }
+
+        //back button
+        KeyboardButton back = new KeyboardButton();
+        back.setText("Back");
+        KeyboardRow row = new KeyboardRow();
+        row.add(back);
+        rowList.add(row);
+
+        ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup();
+        markup.setKeyboard(rowList);
+        markup.setResizeKeyboard(true);
+        sendMessage.setReplyMarkup(markup);
+
+        return sendMessage;
+    }
+
+    public Optional<?> sendProduct(String text, String chatId) {
+
+        try {
+            Products product = LocalData.getProductWithName(text);
+            String habar = String.format("Ovqat nomi : %s\nMalumot : %s\nNarxi : %s", product.getName(), product.getDescription(), product.getPrice());
+
+            InputFile file = new InputFile(new File("C:\\Users\\Asus\\Desktop\\Ovqat\\" + product.getImage() + ".jpg"));
+
+            SendPhoto sendPhoto = new SendPhoto();
+            sendPhoto.setPhoto(file);
+            sendPhoto.setCaption(habar);
+            sendPhoto.setChatId(chatId);
+
+            return Optional.of(sendPhoto);
+        } catch (Exception e) {
+
+            SendMessage message = new SendMessage();
+            message.setText("Bunday ovqat yo'q");
+            message.setChatId(chatId);
+            return Optional.of(message);
+        }
+    }
+
 }
